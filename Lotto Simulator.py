@@ -10,14 +10,15 @@ def main():
     print('')
     print(f'Your numbers: {user_set}')
     print(f'Winning numbers: {winning_set}')
+    print(f'Correct guesses: {correct_guesses[1]}')
     print('')
 
-    if correct_guesses == 0:
+    if correct_guesses[0] == 0:
         print('Unfortunately, you did not guess any of the numbers :( ')
-    elif correct_guesses == 1:
+    elif correct_guesses[0] == 1:
         print(f'Congratulations! You guessed 1 number!')
-    elif 6 > correct_guesses > 1:
-        print(f'Congratulations! You guessed {correct_guesses} numbers!')
+    elif 6 > correct_guesses[0] > 1:
+        print(f'Congratulations! You guessed {correct_guesses[0]} numbers!')
     else:
         print('It is UNBELIEVABLE!! You guessed all of the numbers! You win the main price!')
 
@@ -50,7 +51,7 @@ def take_user_input(count):
             if num < 1 or num > 49:
                 raise ValueError
             elif num in user_set:
-                print('You have already chose that number!')
+                print('You have already chosen that number!')
                 raise ValueError
             user_set.append(num)
             guess += 1
@@ -65,14 +66,17 @@ def compare_lists(list_1, list_2):
 
     :param list_1: first set of values
     :param list_2: second set of values
-    :return: an integer: a number of values that repeat for both lists
+    :return: an integer: a number of values that repeat for both lists,
+            a list of numbers that repeated
     """
 
     repeats = 0
+    repeats_list = []
     for i in list_1:
         if i in list_2:
             repeats += 1
-    return repeats
+            repeats_list.append(i)
+    return repeats, repeats_list
 
 
 if __name__ == '__main__':
